@@ -5,7 +5,7 @@ import {
   repository,
   Where,
 } from '@loopback/repository';
-import {
+  import {
   del,
   get,
   getModelSchemaRef,
@@ -16,20 +16,21 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  Administrador,
-  Producto,
+Pedido,
+PedidoProducto,
+Producto,
 } from '../models';
-import {AdministradorRepository} from '../repositories';
+import {PedidoRepository} from '../repositories';
 
-export class AdministradorProductoController {
+export class PedidoProductoController {
   constructor(
-    @repository(AdministradorRepository) protected administradorRepository: AdministradorRepository,
+    @repository(PedidoRepository) protected pedidoRepository: PedidoRepository,
   ) { }
 
-  @get('/administrador/{id}/productos', {
+  @get('/pedidos/{id}/productos', {
     responses: {
       '200': {
-        description: 'Array of Administrador has many Producto',
+        description: 'Array of Pedido has many Producto through PedidoProducto',
         content: {
           'application/json': {
             schema: {type: 'array', items: getModelSchemaRef(Producto)},
@@ -42,38 +43,37 @@ export class AdministradorProductoController {
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Producto>,
   ): Promise<Producto[]> {
-    return this.administradorRepository.productos(id).find(filter);
+    return this.pedidoRepository.productos(id).find(filter);
   }
 
-  @post('/administrador/{id}/productos', {
+  @post('/pedidos/{id}/productos', {
     responses: {
       '200': {
-        description: 'Administrador model instance',
+        description: 'create a Producto model instance',
         content: {'application/json': {schema: getModelSchemaRef(Producto)}},
       },
     },
   })
   async create(
-    @param.path.string('id') id: typeof Administrador.prototype.id,
+    @param.path.string('id') id: typeof Pedido.prototype.id,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Producto, {
-            title: 'NewProductoInAdministrador',
+            title: 'NewProductoInPedido',
             exclude: ['id'],
-            optional: ['administradorId']
           }),
         },
       },
     }) producto: Omit<Producto, 'id'>,
   ): Promise<Producto> {
-    return this.administradorRepository.productos(id).create(producto);
+    return this.pedidoRepository.productos(id).create(producto);
   }
 
-  @patch('/administrador/{id}/productos', {
+  @patch('/pedidos/{id}/productos', {
     responses: {
       '200': {
-        description: 'Administrador.Producto PATCH success count',
+        description: 'Pedido.Producto PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -90,13 +90,13 @@ export class AdministradorProductoController {
     producto: Partial<Producto>,
     @param.query.object('where', getWhereSchemaFor(Producto)) where?: Where<Producto>,
   ): Promise<Count> {
-    return this.administradorRepository.productos(id).patch(producto, where);
+    return this.pedidoRepository.productos(id).patch(producto, where);
   }
 
-  @del('/administrador/{id}/productos', {
+  @del('/pedidos/{id}/productos', {
     responses: {
       '200': {
-        description: 'Administrador.Producto DELETE success count',
+        description: 'Pedido.Producto DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -105,6 +105,6 @@ export class AdministradorProductoController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Producto)) where?: Where<Producto>,
   ): Promise<Count> {
-    return this.administradorRepository.productos(id).delete(where);
+    return this.pedidoRepository.productos(id).delete(where);
   }
 }

@@ -10,14 +10,20 @@ export class PedidoProducto extends Entity {
   id?: string;
 
   @property({
-    type: 'string',
+    type: 'number',
+    required: true,
   })
-  productoId?: string;
+  total: number;
 
   @property({
     type: 'string',
   })
   pedidoId?: string;
+
+  @property({
+    type: 'string',
+  })
+  productoId?: string;
 
   constructor(data?: Partial<PedidoProducto>) {
     super(data);
