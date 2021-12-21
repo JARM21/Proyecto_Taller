@@ -26,7 +26,7 @@ export class AdministradorProductoController {
     @repository(AdministradorRepository) protected administradorRepository: AdministradorRepository,
   ) { }
 
-  @get('/administradors/{id}/productos', {
+  @get('/administrador/{id}/productos', {
     responses: {
       '200': {
         description: 'Array of Administrador has many Producto',
@@ -45,7 +45,7 @@ export class AdministradorProductoController {
     return this.administradorRepository.productos(id).find(filter);
   }
 
-  @post('/administradors/{id}/productos', {
+  @post('/administrador/{id}/productos', {
     responses: {
       '200': {
         description: 'Administrador model instance',
@@ -70,7 +70,7 @@ export class AdministradorProductoController {
     return this.administradorRepository.productos(id).create(producto);
   }
 
-  @patch('/administradors/{id}/productos', {
+  @patch('/administrador/{id}/productos', {
     responses: {
       '200': {
         description: 'Administrador.Producto PATCH success count',
@@ -93,7 +93,7 @@ export class AdministradorProductoController {
     return this.administradorRepository.productos(id).patch(producto, where);
   }
 
-  @del('/administradors/{id}/productos', {
+  @del('/administrador/{id}/productos', {
     responses: {
       '200': {
         description: 'Administrador.Producto DELETE success count',

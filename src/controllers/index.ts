@@ -6,3 +6,5 @@ export * from './producto-administrador.controller';
 export * from './administrador-producto.controller';
 export * from './cliente.controller';
 export * from './administrador.controller';
+export * from './producto.controller';
+export * from './pedido.controller';

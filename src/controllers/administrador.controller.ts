@@ -26,7 +26,7 @@ export class AdministradorController {
     public administradorRepository : AdministradorRepository,
   ) {}
 
-  @post('/')
+  @post('/Administrador')
   @response(200, {
     description: 'Administrador model instance',
     content: {'application/json': {schema: getModelSchemaRef(Administrador)}},
@@ -47,7 +47,7 @@ export class AdministradorController {
     return this.administradorRepository.create(administrador);
   }
 
-  @get('//count')
+  @get('/Administrador/count')
   @response(200, {
     description: 'Administrador model count',
     content: {'application/json': {schema: CountSchema}},
@@ -58,7 +58,7 @@ export class AdministradorController {
     return this.administradorRepository.count(where);
   }
 
-  @get('/')
+  @get('/Administrador')
   @response(200, {
     description: 'Array of Administrador model instances',
     content: {
@@ -76,7 +76,7 @@ export class AdministradorController {
     return this.administradorRepository.find(filter);
   }
 
-  @patch('/')
+  @patch('/Administrador')
   @response(200, {
     description: 'Administrador PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -95,7 +95,7 @@ export class AdministradorController {
     return this.administradorRepository.updateAll(administrador, where);
   }
 
-  @get('//{id}')
+  @get('/Administrador/{id}')
   @response(200, {
     description: 'Administrador model instance',
     content: {
@@ -111,7 +111,7 @@ export class AdministradorController {
     return this.administradorRepository.findById(id, filter);
   }
 
-  @patch('//{id}')
+  @patch('/Administrador/{id}')
   @response(204, {
     description: 'Administrador PATCH success',
   })
@@ -129,7 +129,7 @@ export class AdministradorController {
     await this.administradorRepository.updateById(id, administrador);
   }
 
-  @put('//{id}')
+  @put('/Administrador/{id}')
   @response(204, {
     description: 'Administrador PUT success',
   })
@@ -140,7 +140,7 @@ export class AdministradorController {
     await this.administradorRepository.replaceById(id, administrador);
   }
 
-  @del('//{id}')
+  @del('/Administrador/{id}')
   @response(204, {
     description: 'Administrador DELETE success',
   })
